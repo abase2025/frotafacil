@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FrotaFácil - Vistoria de Veículos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/logo_style.css">
+    <link rel="stylesheet" href="css/menu_style.css">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="img/logo.png" alt="FrotaFácil Logo" onerror="this.src='https://via.placeholder.com/40x40?text=FF';this.onerror='';">
+                <div>
+                    <h1>FrotaFácil</h1>
+                    <div class="header-slogan">Investigação • Perícia • Rastreamento</div>
+                </div>
+            </div>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="vistoria.html" class="active">Vistoria</a></li>
+                    <li><a href="documentos.html">Documentos</a></li>
+                    <li><a href="multas.html">Multas</a></li>
+                    <li><a href="relatorios.html">Relatórios</a></li>
+                    <li><a href="assinatura.html">Assinatura</a></li>
+                    <li><a href="cadastro/index.html" class="btn-cadastro"><i class="fas fa-user-plus"></i> Criar Conta</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h2>Vistoria de Veículos</h2>
+                <p>Realize vistorias semanais para garantir a segurança e manutenção dos seus veículos.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Agendar Nova Vistoria</h3>
+                </div>
+                <div class="card-body">
+                    <form id="vistoriaForm">
+                        <div class="form-group">
+                            <label for="veiculo">Selecione o Veículo</label>
+                            <select id="veiculo" required>
+                                <option value="">Selecione...</option>
+                                <option value="1">Toyota Corolla - Placa ABC1234</option>
+                                <option value="2">Honda Civic - Placa DEF5678</option>
+                                <option value="3">Hyundai HB20 - Placa GHI9012</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="dataVistoria">Data da Vistoria</label>
+                            <input type="date" id="dataVistoria" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="horaVistoria">Horário</label>
+                            <input type="time" id="horaVistoria" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="localVistoria">Local da Vistoria</label>
+                            <input type="text" id="localVistoria" placeholder="Ex: Sede da empresa" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="observacoes">Observações</label>
+                            <textarea id="observacoes" rows="3" placeholder="Informe detalhes adicionais se necessário"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Agendar Vistoria</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Vistorias Agendadas</h3>
+                </div>
+                <div class="card-body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Veículo</th>
+                                <th>Data</th>
+                                <th>Horário</th>
+                                <th>Local</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Toyota Corolla - ABC1234</td>
+                                <td>30/05/2025</td>
+                                <td>14:30</td>
+                                <td>Sede da empresa</td>
+                                <td><span class="status status-pending">Agendada</span></td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">Reagendar</button>
+                                    <button class="btn btn-outline btn-sm">Cancelar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Honda Civic - DEF5678</td>
+                                <td>28/05/2025</td>
+                                <td>10:00</td>
+                                <td>Sede da empresa</td>
+                                <td><span class="status status-approved">Concluída</span></td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">Ver Relatório</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Checklist de Vistoria</h3>
+                </div>
+                <div class="card-body">
+                    <div class="tabs">
+                        <div class="tab-buttons">
+                            <button class="tab-button active" data-tab="exterior">Exterior</button>
+                            <button class="tab-button" data-tab="interior">Interior</button>
+                            <button class="tab-button" data-tab="mecanica">Mecânica</button>
+                            <button class="tab-button" data-tab="documentacao">Documentação</button>
+                        </div>
+                        <div class="tab-contents">
+                            <div id="exterior" class="tab-content active">
+                                <h4>Vistoria Externa do Veículo</h4>
+                                <div class="checklist">
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="farol">
+                                        <label for="farol">Faróis funcionando</label>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="lanterna">
+                                        <label for="lanterna">Lanternas funcionando</label>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="pneus">
+                                        <label for="pneus">Pneus em bom estado</label>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="pintura">
+                                        <label for="pintura">Pintura sem danos</label>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="vidros">
+                                        <label for="vidros">Vidros sem trincas</label>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="retrovisores">
+                                        <label for="retrovisores">Retrovisores em bom estado</label>
+                                    </div>
+                                </div>
+                                <div class="image-uploads">
+                                    <h4>Fotos do Exterior</h4>
+                                    <div class="image-upload-grid">
+                                        <div class="image-upload">
+                                            <div class="image-preview">
+                                                <i class="fas fa-camera"></i>
+                                                <span>Frente</span>
+                                            </div>
+                                            <input type="file" accept="image/*">
+                                        </div>
+                                        <div class="image-upload">
+                                            <div class="image-preview">
+                                                <i class="fas fa-camera"></i>
+                                                <span>Lateral Direita</span>
+                                            </div>
+                                            <input type="file" accept="image/*">
+                                        </div>
+                                        <div class="image-upload">
+                                            <div class="image-preview">
+                                                <i class="fas fa-camera"></i>
+                                                <span>Lateral Esquerda</span>
+                                            </div>
+                                            <input type="file" accept="image/*">
+                                        </div>
+                                        <div class="image-upload">
+                                            <div class="image-preview">
+                                                <i class="fas fa-camera"></i>
+                                                <span>Traseira</span>
+                                            </div>
+                                            <input type="file" accept="image/*">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="interior" class="tab-content">
+                                <h4>Vistoria Interna do Veículo</h4>
+                                <div class="checklist">
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="bancos">
+                                        <label for="bancos">Bancos em bom estado</label>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="cinto">
+                                        <label for="cinto">Cintos de segurança funcionando</label>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="painel">
+                                        <label for="painel">Painel sem avarias</label>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="arcondicionado">
+                                        <label for="arcondicionado">Ar-condicionado funcionando</label>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="radio">
+                                        <label for="radio">Rádio/Multimídia funcionando</label>
+                                    </div>
+                                </div>
+                                <div class="image-uploads">
+                                    <h4>Fotos do Interior</h4>
+                                    <div class="image-upload-grid">
+                                        <div class="image-upload">
+                                            <div class="image-preview">
+                                                <i class="fas fa-camera"></i>
+                                                <span>Painel</span>
+                                            </div>
+                                            <input type="file" accept="image/*">
+                                        </div>
+                                        <div class="image-upload">
+                                            <div class="image-preview">
+                                                <i class="fas fa-camera"></i>
+                                                <span>Bancos Dianteiros</span>
+                                            </div>
+                                            <input type="file" accept="image/*">
+                                        </div>
+                                        <div class="image-upload">
+                                            <div class="image-preview">
+                                                <i class="fas fa-camera"></i>
+                                                <span>Bancos Traseiros</span>
+                                            </div>
+                                            <input type="file" accept="image/*">
+                                        </div>
+                                        <div class="image-upload">
+                                            <div class="image-preview">
+                                                <i class="fas fa-camera"></i>
+                                                <span>Porta-malas</span>
+                                            </div>
+                                            <input type="file" accept="image/*">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="mecanica" class="tab-content">
+                                <h4>Vistoria Mecânica do Veículo</h4>
+                                <div class="checklist">
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="motor">
+                                        <label for="motor">Motor em bom funcionamento</label>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="freios">
+                                        <label for="freios">Sistema de freios em bom estado</label>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="suspensao">
+                                        <label for="suspensao">Suspensão em bom estado</label>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="oleo">
+                                        <label for="oleo">Nível de óleo adequado</label>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="agua">
+                                        <label for="agua">Nível de água adequado</label>
+                                    </div>
+                                </div>
+                                <div class="image-uploads">
+                                    <h4>Fotos da Mecânica</h4>
+                                    <div class="image-upload-grid">
+                                        <div class="image-upload">
+                                            <div class="image-preview">
+                                                <i class="fas fa-camera"></i>
+                                                <span>Motor</span>
+                                            </div>
+                                            <input type="file" accept="image/*">
+                                        </div>
+                                        <div class="image-upload">
+                                            <div class="image-preview">
+                                                <i class="fas fa-camera"></i>
+                                                <span>Pneus</span>
+                                            </div>
+                                            <input type="file" accept="image/*">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="documentacao" class="tab-content">
+                                <h4>Documentação do Veículo</h4>
+                                <div class="checklist">
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="crlv">
+                                        <label for="crlv">CRLV válido</label>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="ipva">
+                                        <label for="ipva">IPVA pago</label>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="seguro">
+                                        <label for="seguro">Seguro válido</label>
+                                    </div>
+                                </div>
+                                <div class="image-uploads">
+                                    <h4>Fotos dos Documentos</h4>
+                                    <div class="image-upload-grid">
+                                        <div class="image-upload">
+                                            <div class="image-preview">
+                                                <i class="fas fa-camera"></i>
+                                                <span>CRLV</span>
+                                            </div>
+                                            <input type="file" accept="image/*">
+                                        </div>
+                                        <div class="image-upload">
+                                            <div class="image-preview">
+                                                <i class="fas fa-camera"></i>
+                                                <span>Comprovante IPVA</span>
+                                            </div>
+                                            <input type="file" accept="image/*">
+                                        </div>
+                                        <div class="image-upload">
+                                            <div class="image-preview">
+                                                <i class="fas fa-camera"></i>
+                                                <span>Apólice de Seguro</span>
+                                            </div>
+                                            <input type="file" accept="image/*">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline">Cancelar</button>
+                        <button type="button" class="btn btn-primary">Salvar Vistoria</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>FrotaFácil</h3>
+                    <p>Alugue e deixe tudo com a gente. Gerenciamento de frotas para motoristas de aplicativo com segurança e tranquilidade.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="vistoria.html">Vistoria</a></li>
+                        <li><a href="documentos.html">Documentos</a></li>
+                        <li><a href="multas.html">Multas</a></li>
+                        <li><a href="relatorios.html">Relatórios</a></li>
+                        <li><a href="cadastro/index.html">Criar Conta</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> (11) 9999-9999</li>
+                        <li><i class="fas fa-envelope"></i> contato@frotafacil.com.br</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Av. Paulista, 1000 - São Paulo/SP</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 FrotaFácil. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    
+    <!-- Scripts do banco de dados -->
+    <script type="module" src="js/db/config.js"></script>
+    <script type="module" src="js/db/init.js"></script>
+    <script src="js/db/supabase.js"></script>
+</body>
+</html>

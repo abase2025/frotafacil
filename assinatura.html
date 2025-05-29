@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FrotaFácil - Assinatura</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/logo_style.css">
+    <link rel="stylesheet" href="css/menu_style.css">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="img/logo.png" alt="FrotaFácil Logo" onerror="this.src='https://via.placeholder.com/40x40?text=FF';this.onerror='';">
+                <div>
+                    <h1>FrotaFácil</h1>
+                    <div class="header-slogan">Investigação • Perícia • Rastreamento</div>
+                </div>
+            </div>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="vistoria.html">Vistoria</a></li>
+                    <li><a href="documentos.html">Documentos</a></li>
+                    <li><a href="multas.html">Multas</a></li>
+                    <li><a href="relatorios.html">Relatórios</a></li>
+                    <li><a href="assinatura.html" class="active">Assinatura</a></li>
+                    <li><a href="cadastro/index.html" class="btn-cadastro"><i class="fas fa-user-plus"></i> Criar Conta</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h2>Assinatura</h2>
+                <p>Gerencie sua assinatura do FrotaFácil e aproveite todos os benefícios.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Plano Atual</h3>
+                </div>
+                <div class="card-body">
+                    <div class="plan-details">
+                        <div class="plan-header">
+                            <div class="plan-name">Plano Básico</div>
+                            <div class="plan-price">R$ 50,00<span>/mês</span></div>
+                        </div>
+                        <div class="plan-status">
+                            <span class="status status-approved">Ativo</span>
+                            <p>Próxima cobrança: 15/06/2025</p>
+                        </div>
+                        <div class="plan-features">
+                            <h4>Recursos Incluídos:</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Vistoria semanal de veículos</li>
+                                <li><i class="fas fa-check"></i> Análise de documentos do locador</li>
+                                <li><i class="fas fa-check"></i> Verificação semanal de multas</li>
+                                <li><i class="fas fa-check"></i> Relatórios mensais detalhados</li>
+                                <li><i class="fas fa-check"></i> Seguro obrigatório</li>
+                                <li><i class="fas fa-check"></i> Suporte por e-mail e telefone</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Método de Pagamento</h3>
+                </div>
+                <div class="card-body">
+                    <div class="payment-methods">
+                        <div class="current-method">
+                            <h4>Método Atual</h4>
+                            <div class="payment-card">
+                                <div class="card-icon">
+                                    <i class="fab fa-cc-visa"></i>
+                                </div>
+                                <div class="card-details">
+                                    <div class="card-number">Visa terminando em 1234</div>
+                                    <div class="card-expiry">Validade: 12/2027</div>
+                                </div>
+                                <button class="btn btn-outline btn-sm">Alterar</button>
+                            </div>
+                        </div>
+
+                        <div class="add-method">
+                            <h4>Adicionar Novo Método de Pagamento</h4>
+                            <form id="paymentForm">
+                                <div class="form-group">
+                                    <label for="paymentType">Tipo de Pagamento</label>
+                                    <select id="paymentType" required>
+                                        <option value="">Selecione...</option>
+                                        <option value="creditCard">Cartão de Crédito</option>
+                                        <option value="debitCard">Cartão de Débito</option>
+                                        <option value="boleto">Boleto Bancário</option>
+                                        <option value="pix">PIX</option>
+                                    </select>
+                                </div>
+                                <div id="cardFields">
+                                    <div class="form-group">
+                                        <label for="cardNumber">Número do Cartão</label>
+                                        <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000">
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="cardExpiry">Validade</label>
+                                            <input type="text" id="cardExpiry" placeholder="MM/AA">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cardCvv">CVV</label>
+                                            <input type="text" id="cardCvv" placeholder="123">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cardName">Nome no Cartão</label>
+                                        <input type="text" id="cardName" placeholder="Nome como aparece no cartão">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Adicionar Método de Pagamento</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Histórico de Pagamentos</h3>
+                </div>
+                <div class="card-body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Descrição</th>
+                                <th>Valor</th>
+                                <th>Status</th>
+                                <th>Método</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>15/05/2025</td>
+                                <td>Assinatura Mensal - Plano Básico</td>
+                                <td>R$ 50,00</td>
+                                <td><span class="status status-approved">Pago</span></td>
+                                <td>Visa **** 1234</td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">Recibo</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>15/04/2025</td>
+                                <td>Assinatura Mensal - Plano Básico</td>
+                                <td>R$ 50,00</td>
+                                <td><span class="status status-approved">Pago</span></td>
+                                <td>Visa **** 1234</td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">Recibo</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>15/03/2025</td>
+                                <td>Assinatura Mensal - Plano Básico</td>
+                                <td>R$ 50,00</td>
+                                <td><span class="status status-approved">Pago</span></td>
+                                <td>Visa **** 1234</td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">Recibo</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Configurações da Assinatura</h3>
+                </div>
+                <div class="card-body">
+                    <div class="subscription-settings">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Renovação Automática</h4>
+                                <p>Sua assinatura será renovada automaticamente a cada mês.</p>
+                            </div>
+                            <div class="setting-action">
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Notificações de Pagamento</h4>
+                                <p>Receba lembretes por e-mail antes da data de cobrança.</p>
+                            </div>
+                            <div class="setting-action">
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Recibos por E-mail</h4>
+                                <p>Receba recibos de pagamento automaticamente por e-mail.</p>
+                            </div>
+                            <div class="setting-action">
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Cancelar Assinatura</h4>
+                                <p>Você pode cancelar sua assinatura a qualquer momento.</p>
+                            </div>
+                            <div class="setting-action">
+                                <button class="btn btn-outline">Cancelar Assinatura</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>FrotaFácil</h3>
+                    <p>Alugue e deixe tudo com a gente. Gerenciamento de frotas para motoristas de aplicativo com segurança e tranquilidade.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="vistoria.html">Vistoria</a></li>
+                        <li><a href="documentos.html">Documentos</a></li>
+                        <li><a href="multas.html">Multas</a></li>
+                        <li><a href="relatorios.html">Relatórios</a></li>
+                        <li><a href="cadastro/index.html">Criar Conta</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> (11) 9999-9999</li>
+                        <li><i class="fas fa-envelope"></i> contato@frotafacil.com.br</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Av. Paulista, 1000 - São Paulo/SP</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 FrotaFácil. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    
+    <!-- Scripts do banco de dados -->
+    <script type="module" src="js/db/config.js"></script>
+    <script type="module" src="js/db/init.js"></script>
+    <script src="js/db/supabase.js"></script>
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FrotaFácil - Relatórios Mensais</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/logo_style.css">
+    <link rel="stylesheet" href="css/menu_style.css">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="img/logo.png" alt="FrotaFácil Logo" onerror="this.src='https://via.placeholder.com/40x40?text=FF';this.onerror='';">
+                <div>
+                    <h1>FrotaFácil</h1>
+                    <div class="header-slogan">Investigação • Perícia • Rastreamento</div>
+                </div>
+            </div>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="vistoria.html">Vistoria</a></li>
+                    <li><a href="documentos.html">Documentos</a></li>
+                    <li><a href="multas.html">Multas</a></li>
+                    <li><a href="relatorios.html" class="active">Relatórios</a></li>
+                    <li><a href="assinatura.html">Assinatura</a></li>
+                    <li><a href="cadastro/index.html" class="btn-cadastro"><i class="fas fa-user-plus"></i> Criar Conta</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h2>Relatórios Mensais</h2>
+                <p>Acompanhe o desempenho da sua frota com relatórios detalhados e estatísticas.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Gerar Relatório</h3>
+                </div>
+                <div class="card-body">
+                    <form id="relatorioForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="periodoInicio">Período Inicial</label>
+                                <input type="date" id="periodoInicio" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="periodoFim">Período Final</label>
+                                <input type="date" id="periodoFim" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="tipoRelatorio">Tipo de Relatório</label>
+                            <select id="tipoRelatorio" required>
+                                <option value="">Selecione...</option>
+                                <option value="completo">Relatório Completo</option>
+                                <option value="financeiro">Financeiro</option>
+                                <option value="manutencao">Manutenção</option>
+                                <option value="multas">Multas</option>
+                                <option value="vistorias">Vistorias</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="veiculoRelatorio">Veículo</label>
+                            <select id="veiculoRelatorio">
+                                <option value="todos">Todos os Veículos</option>
+                                <option value="1">Toyota Corolla - Placa ABC1234</option>
+                                <option value="2">Honda Civic - Placa DEF5678</option>
+                                <option value="3">Hyundai HB20 - Placa GHI9012</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="formatoRelatorio">Formato de Saída</label>
+                            <select id="formatoRelatorio" required>
+                                <option value="pdf">PDF</option>
+                                <option value="excel">Excel</option>
+                                <option value="csv">CSV</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Incluir no Relatório</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="incluirGraficos" checked>
+                                    <label for="incluirGraficos">Gráficos e Estatísticas</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="incluirDetalhes" checked>
+                                    <label for="incluirDetalhes">Detalhamento por Veículo</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="incluirComparativo">
+                                    <label for="incluirComparativo">Comparativo com Período Anterior</label>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Gerar Relatório</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Relatórios Recentes</h3>
+                </div>
+                <div class="card-body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Período</th>
+                                <th>Tipo</th>
+                                <th>Veículo</th>
+                                <th>Data de Geração</th>
+                                <th>Formato</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>01/04/2025 - 30/04/2025</td>
+                                <td>Relatório Completo</td>
+                                <td>Todos os Veículos</td>
+                                <td>02/05/2025</td>
+                                <td>PDF</td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">Visualizar</button>
+                                    <button class="btn btn-outline btn-sm">Baixar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>01/03/2025 - 31/03/2025</td>
+                                <td>Financeiro</td>
+                                <td>Todos os Veículos</td>
+                                <td>03/04/2025</td>
+                                <td>Excel</td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">Visualizar</button>
+                                    <button class="btn btn-outline btn-sm">Baixar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>01/03/2025 - 31/03/2025</td>
+                                <td>Multas</td>
+                                <td>Honda Civic - DEF5678</td>
+                                <td>02/04/2025</td>
+                                <td>PDF</td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">Visualizar</button>
+                                    <button class="btn btn-outline btn-sm">Baixar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Resumo do Mês Atual</h3>
+                </div>
+                <div class="card-body">
+                    <div class="dashboard-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" data-value="3">0</div>
+                            <div class="stat-label">Veículos Ativos</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" data-value="12">0</div>
+                            <div class="stat-label">Vistorias Realizadas</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" data-value="2">0</div>
+                            <div class="stat-label">Multas Registradas</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" data-value="9500">0</div>
+                            <div class="stat-label">Receita Total (R$)</div>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <h4>Receita Mensal (últimos 6 meses)</h4>
+                        <canvas id="monthlyReportChart" width="800" height="300"></canvas>
+                    </div>
+
+                    <div class="chart-container">
+                        <h4>Distribuição de Despesas</h4>
+                        <div class="chart-row">
+                            <canvas id="expensesChart" width="400" height="300"></canvas>
+                            <div class="chart-legend">
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background-color: #4A90E2;"></span>
+                                    <span class="legend-label">Manutenção (35%)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background-color: #2E8B57;"></span>
+                                    <span class="legend-label">Combustível (25%)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background-color: #F8BBD0;"></span>
+                                    <span class="legend-label">Multas (15%)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background-color: #FFC107;"></span>
+                                    <span class="legend-label">Seguro (20%)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background-color: #E53935;"></span>
+                                    <span class="legend-label">Outros (5%)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Relatórios Programados</h3>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <h4>Automatize seus relatórios</h4>
+                            <p>Configure relatórios para serem gerados automaticamente e enviados por e-mail no início de cada mês.</p>
+                        </div>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Tipo</th>
+                                <th>Frequência</th>
+                                <th>Destinatários</th>
+                                <th>Próximo Envio</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Relatório Mensal Completo</td>
+                                <td>Completo</td>
+                                <td>Mensal (dia 1)</td>
+                                <td>contato@empresa.com</td>
+                                <td>01/06/2025</td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">Editar</button>
+                                    <button class="btn btn-outline btn-sm">Excluir</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Relatório de Multas</td>
+                                <td>Multas</td>
+                                <td>Semanal (segunda)</td>
+                                <td>financeiro@empresa.com</td>
+                                <td>02/06/2025</td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">Editar</button>
+                                    <button class="btn btn-outline btn-sm">Excluir</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <button class="btn btn-secondary mt-3">Programar Novo Relatório</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>FrotaFácil</h3>
+                    <p>Alugue e deixe tudo com a gente. Gerenciamento de frotas para motoristas de aplicativo com segurança e tranquilidade.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="vistoria.html">Vistoria</a></li>
+                        <li><a href="documentos.html">Documentos</a></li>
+                        <li><a href="multas.html">Multas</a></li>
+                        <li><a href="relatorios.html">Relatórios</a></li>
+                        <li><a href="cadastro/index.html">Criar Conta</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> (11) 9999-9999</li>
+                        <li><i class="fas fa-envelope"></i> contato@frotafacil.com.br</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Av. Paulista, 1000 - São Paulo/SP</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 FrotaFácil. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animação dos valores estatísticos
+            const statValues = document.querySelectorAll('.stat-value');
+            statValues.forEach(function(stat) {
+                const targetValue = parseInt(stat.getAttribute('data-value'));
+                let currentValue = 0;
+                const duration = 1500; // ms
+                const interval = 50; // ms
+                const increment = targetValue / (duration / interval);
+                
+                const counter = setInterval(function() {
+                    currentValue += increment;
+                    if (currentValue >= targetValue) {
+                        currentValue = targetValue;
+                        clearInterval(counter);
+                    }
+                    stat.textContent = Math.floor(currentValue).toLocaleString();
+                }, interval);
+            });
+            
+            // Gráfico de receita mensal
+            const monthlyCtx = document.getElementById('monthlyReportChart').getContext('2d');
+            const monthlyChart = new Chart(monthlyCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Dezembro', 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'],
+                    datasets: [{
+                        label: 'Receita Mensal (R$)',
+                        data: [7800, 8200, 8500, 9100, 9300, 9500],
+                        backgroundColor: 'rgba(74, 144, 226, 0.2)',
+                        borderColor: 'rgba(74, 144, 226, 1)',
+                        borderWidth: 2,
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 7000
+                        }
+                    }
+                }
+            });
+            
+            // Gráfico de distribuição de despesas
+            const expensesCtx = document.getElementById('expensesChart').getContext('2d');
+            const expensesChart = new Chart(expensesCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Manutenção', 'Combustível', 'Multas', 'Seguro', 'Outros'],
+                    datasets: [{
+                        data: [35, 25, 15, 20, 5],
+                        backgroundColor: [
+                            '#4A90E2',
+                            '#2E8B57',
+                            '#F8BBD0',
+                            '#FFC107',
+                            '#E53935'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    
+    <!-- Scripts do banco de dados -->
+    <script type="module" src="js/db/config.js"></script>
+    <script type="module" src="js/db/init.js"></script>
+    <script src="js/db/supabase.js"></script>
+</body>
+</html>

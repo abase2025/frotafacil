@@ -1,0 +1,59 @@
+/* Estilos específicos para a logo */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 70px; /* Aumentado de 40px para 70px */
+  margin-right: 15px;
+  transition: all 0.3s ease;
+}
+
+/* Ajuste para telas maiores */
+@media (min-width: 992px) {
+  .logo img {
+    height: 80px; /* Ainda maior em telas desktop */
+  }
+}
+
+/* Ajuste para telas menores */
+@media (max-width: 768px) {
+  .logo img {
+    height: 60px; /* Um pouco menor em tablets, mas ainda visível */
+  }
+}
+
+@media (max-width: 576px) {
+  .logo img {
+    height: 50px; /* Ajuste para celulares */
+  }
+  
+  .logo h1 {
+    font-size: 1.2rem;
+  }
+  
+  .header-slogan {
+    font-size: 0.8rem;
+  }
+}
+
+/* Sobrescrever o estilo original */
+.header-container {
+  padding: 10px 0;
+}
+
+/* Ajuste para o header para acomodar a logo maior */
+header {
+  padding: 0.5rem 0;
+}
+
+main {
+  margin-top: 100px; /* Ajustado para compensar o header maior */
+}
+
+@media (max-width: 768px) {
+  main {
+    margin-top: 90px;
+  }
+}

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FrotaFácil - Análise de Documentos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/logo_style.css">
+    <link rel="stylesheet" href="css/menu_style.css">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="img/logo.png" alt="FrotaFácil Logo" onerror="this.src='https://via.placeholder.com/40x40?text=FF';this.onerror='';">
+                <div>
+                    <h1>FrotaFácil</h1>
+                    <div class="header-slogan">Investigação • Perícia • Rastreamento</div>
+                </div>
+            </div>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="vistoria.html">Vistoria</a></li>
+                    <li><a href="documentos.html" class="active">Documentos</a></li>
+                    <li><a href="multas.html">Multas</a></li>
+                    <li><a href="relatorios.html">Relatórios</a></li>
+                    <li><a href="assinatura.html">Assinatura</a></li>
+                    <li><a href="cadastro/index.html" class="btn-cadastro"><i class="fas fa-user-plus"></i> Criar Conta</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h2>Análise de Documentos</h2>
+                <p>Gerencie e verifique todos os documentos necessários para a locação segura de veículos.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Enviar Novos Documentos</h3>
+                </div>
+                <div class="card-body">
+                    <form id="documentosForm">
+                        <div class="form-group">
+                            <label for="tipoDocumento">Tipo de Documento</label>
+                            <select id="tipoDocumento" required>
+                                <option value="">Selecione...</option>
+                                <option value="cnh">CNH - Carteira Nacional de Habilitação</option>
+                                <option value="comprovante">Comprovante de Residência</option>
+                                <option value="contrato">Contrato de Locação</option>
+                                <option value="crlv">CRLV - Certificado de Registro e Licenciamento</option>
+                                <option value="seguro">Apólice de Seguro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="nomeLocador">Nome do Locador</label>
+                            <input type="text" id="nomeLocador" placeholder="Nome completo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cpfLocador">CPF do Locador</label>
+                            <input type="text" id="cpfLocador" placeholder="000.000.000-00" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dataValidade">Data de Validade</label>
+                            <input type="date" id="dataValidade">
+                        </div>
+                        <div class="form-group">
+                            <label for="arquivoDocumento">Arquivo do Documento</label>
+                            <input type="file" id="arquivoDocumento" required>
+                            <small>Formatos aceitos: PDF, JPG, PNG (máx. 5MB)</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="observacoesDocumento">Observações</label>
+                            <textarea id="observacoesDocumento" rows="3" placeholder="Informações adicionais sobre o documento"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar para Análise</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Documentos Enviados</h3>
+                </div>
+                <div class="card-body">
+                    <div class="filter-bar">
+                        <div class="form-group">
+                            <label for="filtroStatus">Filtrar por Status</label>
+                            <select id="filtroStatus">
+                                <option value="todos">Todos</option>
+                                <option value="aprovado">Aprovado</option>
+                                <option value="pendente">Pendente</option>
+                                <option value="rejeitado">Rejeitado</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="filtroTipo">Filtrar por Tipo</label>
+                            <select id="filtroTipo">
+                                <option value="todos">Todos</option>
+                                <option value="cnh">CNH</option>
+                                <option value="comprovante">Comprovante de Residência</option>
+                                <option value="contrato">Contrato de Locação</option>
+                                <option value="crlv">CRLV</option>
+                                <option value="seguro">Apólice de Seguro</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-outline">Aplicar Filtros</button>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Locador</th>
+                                <th>Data de Envio</th>
+                                <th>Validade</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>CNH</td>
+                                <td>João Silva</td>
+                                <td>25/05/2025</td>
+                                <td>15/08/2030</td>
+                                <td><span class="status status-approved">Aprovado</span></td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">Visualizar</button>
+                                    <button class="btn btn-outline btn-sm">Baixar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Comprovante de Residência</td>
+                                <td>João Silva</td>
+                                <td>25/05/2025</td>
+                                <td>30/06/2025</td>
+                                <td><span class="status status-approved">Aprovado</span></td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">Visualizar</button>
+                                    <button class="btn btn-outline btn-sm">Baixar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>CRLV</td>
+                                <td>Maria Oliveira</td>
+                                <td>26/05/2025</td>
+                                <td>31/12/2025</td>
+                                <td><span class="status status-pending">Em análise</span></td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">Visualizar</button>
+                                    <button class="btn btn-outline btn-sm">Baixar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Apólice de Seguro</td>
+                                <td>Carlos Santos</td>
+                                <td>24/05/2025</td>
+                                <td>24/05/2026</td>
+                                <td><span class="status status-rejected">Rejeitado</span></td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">Visualizar</button>
+                                    <button class="btn btn-outline btn-sm">Reenviar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Documentos a Vencer</h3>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <h4>Atenção!</h4>
+                            <p>Os documentos abaixo estão próximos do vencimento. Providencie a renovação para evitar problemas com a locação.</p>
+                        </div>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Locador</th>
+                                <th>Vencimento</th>
+                                <th>Dias Restantes</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Comprovante de Residência</td>
+                                <td>João Silva</td>
+                                <td>30/06/2025</td>
+                                <td>33</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Renovar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Apólice de Seguro</td>
+                                <td>Pedro Almeida</td>
+                                <td>15/06/2025</td>
+                                <td>18</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Renovar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>FrotaFácil</h3>
+                    <p>Alugue e deixe tudo com a gente. Gerenciamento de frotas para motoristas de aplicativo com segurança e tranquilidade.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="vistoria.html">Vistoria</a></li>
+                        <li><a href="documentos.html">Documentos</a></li>
+                        <li><a href="multas.html">Multas</a></li>
+                        <li><a href="relatorios.html">Relatórios</a></li>
+                        <li><a href="cadastro/index.html">Criar Conta</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> (11) 9999-9999</li>
+                        <li><i class="fas fa-envelope"></i> contato@frotafacil.com.br</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Av. Paulista, 1000 - São Paulo/SP</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 FrotaFácil. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    
+    <!-- Scripts do banco de dados -->
+    <script type="module" src="js/db/config.js"></script>
+    <script type="module" src="js/db/init.js"></script>
+    <script src="js/db/supabase.js"></script>
+</body>
+</html>

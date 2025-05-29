@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FrotaFácil - Controle de Multas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/logo_style.css">
+    <link rel="stylesheet" href="css/menu_style.css">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="img/logo.png" alt="FrotaFácil Logo" onerror="this.src='https://via.placeholder.com/40x40?text=FF';this.onerror='';">
+                <div>
+                    <h1>FrotaFácil</h1>
+                    <div class="header-slogan">Investigação • Perícia • Rastreamento</div>
+                </div>
+            </div>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="vistoria.html">Vistoria</a></li>
+                    <li><a href="documentos.html">Documentos</a></li>
+                    <li><a href="multas.html" class="active">Multas</a></li>
+                    <li><a href="relatorios.html">Relatórios</a></li>
+                    <li><a href="assinatura.html">Assinatura</a></li>
+                    <li><a href="cadastro/index.html" class="btn-cadastro"><i class="fas fa-user-plus"></i> Criar Conta</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h2>Controle de Multas</h2>
+                <p>Acompanhe e gerencie as multas de trânsito dos veículos da sua frota.</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-value" data-value="3">0</div>
+                    <div class="stat-label">Multas Pendentes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" data-value="12">0</div>
+                    <div class="stat-label">Multas Pagas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" data-value="2">0</div>
+                    <div class="stat-label">Multas em Contestação</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" data-value="1850">0</div>
+                    <div class="stat-label">Valor Total Pendente (R$)</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Registrar Nova Multa</h3>
+                </div>
+                <div class="card-body">
+                    <form id="multaForm">
+                        <div class="form-group">
+                            <label for="veiculoMulta">Veículo</label>
+                            <select id="veiculoMulta" required>
+                                <option value="">Selecione...</option>
+                                <option value="1">Toyota Corolla - Placa ABC1234</option>
+                                <option value="2">Honda Civic - Placa DEF5678</option>
+                                <option value="3">Hyundai HB20 - Placa GHI9012</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="motorista">Motorista</label>
+                            <select id="motorista" required>
+                                <option value="">Selecione...</option>
+                                <option value="1">João Silva</option>
+                                <option value="2">Maria Oliveira</option>
+                                <option value="3">Carlos Santos</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="dataMulta">Data da Infração</label>
+                            <input type="date" id="dataMulta" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tipoMulta">Tipo de Infração</label>
+                            <select id="tipoMulta" required>
+                                <option value="">Selecione...</option>
+                                <option value="velocidade">Excesso de velocidade</option>
+                                <option value="estacionamento">Estacionamento irregular</option>
+                                <option value="semaforo">Avançar sinal vermelho</option>
+                                <option value="documentacao">Documentação irregular</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="valorMulta">Valor da Multa (R$)</label>
+                            <input type="number" id="valorMulta" min="0" step="0.01" placeholder="Ex: 293.47" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pontos">Pontos na Carteira</label>
+                            <input type="number" id="pontos" min="0" max="7" placeholder="Ex: 3" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="localMulta">Local da Infração</label>
+                            <input type="text" id="localMulta" placeholder="Ex: Av. Paulista, 1000" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="imagemMulta">Imagem da Notificação</label>
+                            <input type="file" id="imagemMulta">
+                            <small>Formatos aceitos: JPG, PNG, PDF (máx. 5MB)</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="observacoesMulta">Observações</label>
+                            <textarea id="observacoesMulta" rows="3" placeholder="Informações adicionais sobre a multa"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Responsável pelo Pagamento</label>
+                            <div class="radio-group">
+                                <div class="radio-item">
+                                    <input type="radio" id="respLocador" name="responsavel" value="locador">
+                                    <label for="respLocador">Locador</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="respMotorista" name="responsavel" value="motorista">
+                                    <label for="respMotorista">Motorista</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="respCompartilhado" name="responsavel" value="compartilhado">
+                                    <label for="respCompartilhado">Compartilhado</label>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Registrar Multa</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Multas Pendentes</h3>
+                </div>
+                <div class="card-body">
+                    <div class="filter-bar">
+                        <div class="form-group">
+                            <label for="filtroVeiculo">Filtrar por Veículo</label>
+                            <select id="filtroVeiculo">
+                                <option value="todos">Todos</option>
+                                <option value="1">Toyota Corolla - ABC1234</option>
+                                <option value="2">Honda Civic - DEF5678</option>
+                                <option value="3">Hyundai HB20 - GHI9012</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="filtroStatus">Filtrar por Status</label>
+                            <select id="filtroStatus">
+                                <option value="todos">Todos</option>
+                                <option value="pendente">Pendente</option>
+                                <option value="pago">Pago</option>
+                                <option value="contestacao">Em Contestação</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-outline">Aplicar Filtros</button>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Veículo</th>
+                                <th>Motorista</th>
+                                <th>Data</th>
+                                <th>Tipo</th>
+                                <th>Valor (R$)</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Toyota Corolla - ABC1234</td>
+                                <td>João Silva</td>
+                                <td>20/05/2025</td>
+                                <td>Excesso de velocidade</td>
+                                <td>293,47</td>
+                                <td><span class="status status-pending">Pendente</span></td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">Detalhes</button>
+                                    <button class="btn btn-primary btn-sm">Pagar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Honda Civic - DEF5678</td>
+                                <td>Maria Oliveira</td>
+                                <td>18/05/2025</td>
+                                <td>Estacionamento irregular</td>
+                                <td>195,23</td>
+                                <td><span class="status status-pending">Pendente</span></td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">Detalhes</button>
+                                    <button class="btn btn-primary btn-sm">Pagar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Hyundai HB20 - GHI9012</td>
+                                <td>Carlos Santos</td>
+                                <td>15/05/2025</td>
+                                <td>Avançar sinal vermelho</td>
+                                <td>293,47</td>
+                                <td><span class="status status-rejected">Em Contestação</span></td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">Detalhes</button>
+                                    <button class="btn btn-outline btn-sm">Acompanhar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Histórico de Multas</h3>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <h4>Multas por Mês</h4>
+                        <canvas id="multasChart" width="800" height="300"></canvas>
+                    </div>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Veículo</th>
+                                <th>Motorista</th>
+                                <th>Data</th>
+                                <th>Tipo</th>
+                                <th>Valor (R$)</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Toyota Corolla - ABC1234</td>
+                                <td>João Silva</td>
+                                <td>10/04/2025</td>
+                                <td>Excesso de velocidade</td>
+                                <td>293,47</td>
+                                <td><span class="status status-approved">Pago</span></td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">Detalhes</button>
+                                    <button class="btn btn-outline btn-sm">Recibo</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Honda Civic - DEF5678</td>
+                                <td>Maria Oliveira</td>
+                                <td>05/04/2025</td>
+                                <td>Estacionamento irregular</td>
+                                <td>195,23</td>
+                                <td><span class="status status-approved">Pago</span></td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">Detalhes</button>
+                                    <button class="btn btn-outline btn-sm">Recibo</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Hyundai HB20 - GHI9012</td>
+                                <td>Pedro Almeida</td>
+                                <td>28/03/2025</td>
+                                <td>Documentação irregular</td>
+                                <td>88,38</td>
+                                <td><span class="status status-approved">Pago</span></td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">Detalhes</button>
+                                    <button class="btn btn-outline btn-sm">Recibo</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>FrotaFácil</h3>
+                    <p>Alugue e deixe tudo com a gente. Gerenciamento de frotas para motoristas de aplicativo com segurança e tranquilidade.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="vistoria.html">Vistoria</a></li>
+                        <li><a href="documentos.html">Documentos</a></li>
+                        <li><a href="multas.html">Multas</a></li>
+                        <li><a href="relatorios.html">Relatórios</a></li>
+                        <li><a href="cadastro/index.html">Criar Conta</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> (11) 9999-9999</li>
+                        <li><i class="fas fa-envelope"></i> contato@frotafacil.com.br</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Av. Paulista, 1000 - São Paulo/SP</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 FrotaFácil. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animação dos valores estatísticos
+            const statValues = document.querySelectorAll('.stat-value');
+            statValues.forEach(function(stat) {
+                const targetValue = parseInt(stat.getAttribute('data-value'));
+                let currentValue = 0;
+                const duration = 1500; // ms
+                const interval = 50; // ms
+                const increment = targetValue / (duration / interval);
+                
+                const counter = setInterval(function() {
+                    currentValue += increment;
+                    if (currentValue >= targetValue) {
+                        currentValue = targetValue;
+                        clearInterval(counter);
+                    }
+                    stat.textContent = Math.floor(currentValue).toLocaleString();
+                }, interval);
+            });
+            
+            // Gráfico de multas
+            const ctx = document.getElementById('multasChart').getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'],
+                    datasets: [{
+                        label: 'Multas Registradas',
+                        data: [3, 5, 8, 12, 3],
+                        backgroundColor: 'rgba(74, 144, 226, 0.7)',
+                        borderColor: 'rgba(74, 144, 226, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 2
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    
+    <!-- Scripts do banco de dados -->
+    <script type="module" src="js/db/config.js"></script>
+    <script type="module" src="js/db/init.js"></script>
+    <script src="js/db/supabase.js"></script>
+</body>
+</html>
