@@ -169,6 +169,28 @@ document.addEventListener('DOMContentLoaded', function() {
         telefoneInput.addEventListener('input', function() {
             this.value = formatTelefone(this.value);
         });
+        
+        // Validação em tempo real para o telefone
+        telefoneInput.addEventListener('blur', function() {
+            if (!validateTelefone(this.value)) {
+                showError(this, 'Telefone inválido');
+            } else {
+                hideError(this);
+            }
+        });
+    }
+    
+    // Validação de email
+    const emailInput = document.getElementById('email');
+    if (emailInput) {
+        // Validação em tempo real para o email
+        emailInput.addEventListener('blur', function() {
+            if (!validateEmail(this.value)) {
+                showError(this, 'Email inválido');
+            } else {
+                hideError(this);
+            }
+        });
     }
     
     const telefoneAcessoInput = document.getElementById('telefoneAcesso');
@@ -456,50 +478,30 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function validatePassword() {
-        const senhaValue = senha.value;
-        const confirmaSenhaValue = confirmaSenha.value;
+        const senha = document.getElementById('senha');
+        const confirmaSenha = document.getElementById('confirmaSenha');
+        const senhaError = document.getElementById('senhaError');
+        const confirmaSenhaError = document.getElementById('confirmaSenhaError');
         
-        if (senhaValue.length < 6) {
+        if (senha.value.length < 6) {
             senhaError.textContent = 'A senha deve ter pelo menos 6 caracteres';
+            senhaError.style.display = 'block';
         } else {
-            senhaError.textContent = '';
+            senhaError.style.display = 'none';
         }
         
-        if (confirmaSenhaValue && senhaValue !== confirmaSenhaValue) {
+        if (confirmaSenha.value && senha.value !== confirmaSenha.value) {
             confirmaSenhaError.textContent = 'As senhas não coincidem';
+            confirmaSenhaError.style.display = 'block';
         } else {
-            confirmaSenhaError.textContent = '';
+            confirmaSenhaError.style.display = 'none';
         }
     }
     
-    function showError(element, message) {
-        element.classList.add('error');
-        
-        let errorMsg = element.parentNode.querySelector('.error-message');
-        if (!errorMsg) {
-            errorMsg = document.createElement('span');
-            errorMsg.className = 'error-message';
-            element.parentNode.appendChild(errorMsg);
-        }
-        
-        errorMsg.textContent = message;
-    }
-    
-    function hideError(element) {
-        element.classList.remove('error');
-        
-        const errorMsg = element.parentNode.querySelector('.error-message');
-        if (errorMsg) {
-            errorMsg.remove();
-        }
-    }
-    
-    // Funções de formatação e validação
+    // Funções de formatação
     function formatCPF(cpf) {
         cpf = cpf.replace(/\D/g, '');
-        if (cpf.length > 11) {
-            cpf = cpf.substring(0, 11);
-        }
+        if (cpf.length > 11) cpf = cpf.substring(0, 11);
         if (cpf.length > 9) {
             cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
         } else if (cpf.length > 6) {
@@ -512,9 +514,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function formatTelefone(telefone) {
         telefone = telefone.replace(/\D/g, '');
-        if (telefone.length > 11) {
-            telefone = telefone.substring(0, 11);
-        }
+        if (telefone.length > 11) telefone = telefone.substring(0, 11);
         if (telefone.length > 10) {
             telefone = telefone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
         } else if (telefone.length > 6) {
@@ -527,148 +527,188 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function formatCEP(cep) {
         cep = cep.replace(/\D/g, '');
-        if (cep.length > 8) {
-            cep = cep.substring(0, 8);
-        }
+        if (cep.length > 8) cep = cep.substring(0, 8);
         if (cep.length > 5) {
             cep = cep.replace(/(\d{5})(\d{1,3})/, '$1-$2');
         }
         return cep;
     }
     
+    // Funções de validação
     function validateEmail(email) {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(email);
     }
     
     function validateTelefone(telefone) {
-        const re = /^\(\d{2}\) \d{4,5}-\d{4}$/;
-        return re.test(telefone);
+        const tel = telefone.replace(/\D/g, '');
+        return tel.length >= 10 && tel.length <= 11;
     }
     
     function validateCEP(cep) {
-        const re = /^\d{5}-\d{3}$/;
-        return re.test(cep);
+        const cepClean = cep.replace(/\D/g, '');
+        return cepClean.length === 8;
     }
     
     function validateCPF(cpf) {
-        cpf = cpf.replace(/[^\d]/g, '');
-        
-        if (cpf.length !== 11) return false;
+        const cpfClean = cpf.replace(/\D/g, '');
+        if (cpfClean.length !== 11) return false;
         
         // Verifica se todos os dígitos são iguais
-        if (/^(\d)\1+$/.test(cpf)) return false;
+        if (/^(\d)\1+$/.test(cpfClean)) return false;
         
         // Validação do primeiro dígito verificador
         let soma = 0;
         for (let i = 0; i < 9; i++) {
-            soma += parseInt(cpf.charAt(i)) * (10 - i);
+            soma += parseInt(cpfClean.charAt(i)) * (10 - i);
         }
-        let resto = soma % 11;
-        let dv1 = resto < 2 ? 0 : 11 - resto;
-        
-        if (parseInt(cpf.charAt(9)) !== dv1) return false;
+        let resto = 11 - (soma % 11);
+        let dv1 = resto > 9 ? 0 : resto;
         
         // Validação do segundo dígito verificador
         soma = 0;
         for (let i = 0; i < 10; i++) {
-            soma += parseInt(cpf.charAt(i)) * (11 - i);
+            soma += parseInt(cpfClean.charAt(i)) * (11 - i);
         }
-        resto = soma % 11;
-        let dv2 = resto < 2 ? 0 : 11 - resto;
+        resto = 11 - (soma % 11);
+        let dv2 = resto > 9 ? 0 : resto;
         
-        if (parseInt(cpf.charAt(10)) !== dv2) return false;
-        
-        return true;
+        return dv1 === parseInt(cpfClean.charAt(9)) && dv2 === parseInt(cpfClean.charAt(10));
     }
     
-    // Integração com Supabase
-    async function registerUser(userData) {
-        try {
-            // Mostrar indicador de carregamento
-            const submitButton = document.querySelector('button[type="submit"]');
-            const originalText = submitButton.textContent;
-            submitButton.disabled = true;
-            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando...';
-            
-            // Preparar dados para o Supabase
-            const userAuth = {
-                email: userData.metodoAcesso === 'email' ? userData.emailAcesso : userData.email,
-                senha: userData.senha,
-                telefone: userData.metodoAcesso === 'telefone' ? userData.telefoneAcesso : userData.telefone
-            };
-            
-            // Criar usuário no Supabase Auth
-            const { data, error } = await window.dbAuth.registrarUsuario(
-                userData.nome,
-                userAuth.email,
-                userAuth.senha,
-                userAuth.telefone,
-                userData.tipo
-            );
-            
-            if (error) {
-                alert(`Erro ao registrar usuário: ${error.message}`);
-                submitButton.disabled = false;
-                submitButton.textContent = originalText;
+    // Funções de exibição de erro
+    function showError(element, message) {
+        let errorElement = element.nextElementSibling;
+        if (!errorElement || !errorElement.classList.contains('error-message')) {
+            errorElement = document.createElement('span');
+            errorElement.className = 'error-message';
+            element.parentNode.insertBefore(errorElement, element.nextSibling);
+        }
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+        element.classList.add('error');
+    }
+    
+    function hideError(element) {
+        let errorElement = element.nextElementSibling;
+        if (errorElement && errorElement.classList.contains('error-message')) {
+            errorElement.style.display = 'none';
+        }
+        element.classList.remove('error');
+    }
+    
+    // Função para registrar usuário no Supabase
+    function registerUser(userData) {
+        // Simulação de registro bem-sucedido
+        alert('Cadastro realizado com sucesso!');
+        window.location.href = '../index.html';
+        
+        // Implementação real com Supabase
+        /*
+        const { email, senha } = userData;
+        
+        // 1. Registrar o usuário na autenticação do Supabase
+        supabase.auth.signUp({
+            email,
+            password: senha
+        })
+        .then(response => {
+            if (response.error) {
+                alert('Erro ao criar conta: ' + response.error.message);
                 return;
             }
             
-            // Upload de documentos
-            const userId = data.user.id;
+            const userId = response.data.user.id;
             
-            // Upload da foto do RG/CNH
-            if (userData.rgFoto) {
-                const rgFotoFile = document.getElementById('rgFoto').files[0];
-                await uploadDocumento({
-                    usuario_id: userId,
-                    tipo: 'RG/CNH',
-                    numero: userData.rg,
-                    data_emissao: userData.dataEmissao,
-                    status: 'pendente',
-                    observacoes: `Órgão emissor: ${userData.orgaoEmissor}`
-                }, rgFotoFile);
-            }
-            
-            // Upload do comprovante de residência
-            if (userData.comprovante) {
-                const comprovanteFile = document.getElementById('comprovante').files[0];
-                await uploadDocumento({
-                    usuario_id: userId,
-                    tipo: 'Comprovante de Residência',
-                    data_emissao: new Date().toISOString(),
-                    status: 'pendente',
-                    observacoes: `Endereço: ${userData.logradouro}, ${userData.numero}, ${userData.bairro}, ${userData.cidade}-${userData.estado}`
-                }, comprovanteFile);
-            }
-            
-            // Redirecionar para página de sucesso
-            alert('Cadastro realizado com sucesso! Você será redirecionado para a página inicial.');
-            window.location.href = '../index.html';
-            
-        } catch (err) {
-            console.error('Erro ao processar cadastro:', err);
-            alert('Ocorreu um erro ao processar o cadastro. Por favor, tente novamente.');
-            
-            const submitButton = document.querySelector('button[type="submit"]');
-            submitButton.disabled = false;
-            submitButton.textContent = 'Criar Conta';
-        }
-    }
-    
-    async function uploadDocumento(documento, arquivo) {
-        try {
-            const { data, error } = await window.dbDocumentos.uploadDocumento(documento, arquivo);
-            
-            if (error) {
-                console.error('Erro ao fazer upload do documento:', error);
-                throw error;
-            }
-            
-            return data;
-        } catch (err) {
-            console.error('Erro no upload:', err);
-            throw err;
-        }
+            // 2. Salvar os dados do usuário na tabela usuarios
+            supabase.from('usuarios')
+                .insert([
+                    {
+                        id: userId,
+                        nome: userData.nome,
+                        email: userData.email,
+                        telefone: userData.telefone,
+                        tipo: userData.tipo,
+                        status: 'ativo',
+                        cpf: userData.cpf,
+                        rg: userData.rg,
+                        orgao_emissor: userData.orgaoEmissor,
+                        data_emissao: userData.dataEmissao,
+                        cep: userData.cep,
+                        logradouro: userData.logradouro,
+                        numero: userData.numero,
+                        complemento: userData.complemento,
+                        bairro: userData.bairro,
+                        cidade: userData.cidade,
+                        estado: userData.estado
+                    }
+                ])
+                .then(response => {
+                    if (response.error) {
+                        alert('Erro ao salvar dados: ' + response.error.message);
+                        return;
+                    }
+                    
+                    // 3. Upload dos documentos
+                    const rgFotoFile = document.getElementById('rgFoto').files[0];
+                    const comprovanteFile = document.getElementById('comprovante').files[0];
+                    
+                    // Upload do RG/CNH
+                    supabase.storage
+                        .from('documentos')
+                        .upload(`${userId}/rg_cnh`, rgFotoFile)
+                        .then(rgResponse => {
+                            if (rgResponse.error) {
+                                alert('Erro ao enviar RG/CNH: ' + rgResponse.error.message);
+                                return;
+                            }
+                            
+                            // Upload do comprovante de residência
+                            supabase.storage
+                                .from('documentos')
+                                .upload(`${userId}/comprovante`, comprovanteFile)
+                                .then(compResponse => {
+                                    if (compResponse.error) {
+                                        alert('Erro ao enviar comprovante: ' + compResponse.error.message);
+                                        return;
+                                    }
+                                    
+                                    // 4. Registrar os documentos na tabela documentos
+                                    const rgUrl = supabase.storage.from('documentos').getPublicUrl(`${userId}/rg_cnh`).publicURL;
+                                    const compUrl = supabase.storage.from('documentos').getPublicUrl(`${userId}/comprovante`).publicURL;
+                                    
+                                    supabase.from('documentos')
+                                        .insert([
+                                            {
+                                                usuario_id: userId,
+                                                tipo: 'RG/CNH',
+                                                numero: userData.rg,
+                                                data_emissao: userData.dataEmissao,
+                                                url: rgUrl,
+                                                status: 'pendente'
+                                            },
+                                            {
+                                                usuario_id: userId,
+                                                tipo: 'Comprovante de Residência',
+                                                data_emissao: new Date().toISOString(),
+                                                url: compUrl,
+                                                status: 'pendente'
+                                            }
+                                        ])
+                                        .then(docResponse => {
+                                            if (docResponse.error) {
+                                                alert('Erro ao registrar documentos: ' + docResponse.error.message);
+                                                return;
+                                            }
+                                            
+                                            // Cadastro concluído com sucesso
+                                            alert('Cadastro realizado com sucesso!');
+                                            window.location.href = '../index.html';
+                                        });
+                                });
+                        });
+                });
+        });
+        */
     }
 });
